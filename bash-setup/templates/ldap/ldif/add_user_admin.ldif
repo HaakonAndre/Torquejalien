@@ -1,0 +1,14 @@
+dn: uid=admin,ou=People,o=localhost,dc=localdomain
+loginShell: false
+gidNumber: 1
+objectClass: top
+objectClass: posixAccount
+objectClass: AliEnUser
+objectClass: pkiUser
+roles: admin
+uid: admin
+uidNumber: 1
+subject: /C=CH/O=JAliEn/CN=NOadmin
+cn: admin
+homeDirectory: /localhost/localdomain/user/a/admin
+userPassword:: e2NyeXB0fXg=

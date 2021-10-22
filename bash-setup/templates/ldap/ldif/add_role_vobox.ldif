@@ -1,0 +1,6 @@
+dn: uid=vobox,ou=Roles,o=localhost,dc=localdomain
+objectclass: AliEnRole
+objectclass: top
+uid: vobox
+users: admin
+users: jalien

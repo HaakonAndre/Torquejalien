@@ -1,0 +1,4 @@
+dn: ou=Institutions,o=localhost,dc=localdomain
+objectClass: top
+objectClass: organizationalUnit
+ou: Institutions

@@ -1,0 +1,16 @@
+dn: uid=jalien,ou=People,o=localhost,dc=localdomain
+loginShell: false
+gidNumber: 1
+objectClass: top
+objectClass: posixAccount
+objectClass: AliEnUser
+objectClass: pkiUser
+roles: admin
+roles: vobox
+uid: jalien
+uidNumber: 2
+subject: /C=CH/O=JAliEn/CN=jalien
+subject: /C=CH/O=JAliEn/CN=localhost.localdomain
+cn: jalien
+homeDirectory: /localhost/localdomain/user/j/jalien
+userPassword:: e2NyeXB0fXg=

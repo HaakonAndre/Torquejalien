@@ -1,0 +1,4 @@
+dn: ou=PackMan,ou=Services,ou=JTestSite,ou=Sites,o=localhost,dc=localdomain
+objectClass: top
+objectClass: organizationalUnit
+ou: PackMan

@@ -1,0 +1,4 @@
+dn: ou=Services,ou=JTestSite,ou=Sites,o=localhost,dc=localdomain
+objectClass: top
+objectClass: organizationalUnit
+ou: Services

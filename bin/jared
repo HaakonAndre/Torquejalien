@@ -1,0 +1,81 @@
+#!/bin/bash
+set -e
+function die() { echo "$USAGE"; echo "$1"; exit 1; }
+USAGE="Usage: --jar=path/to/alien.jar --volume=/tmp/shared-volume"
+OPTS=$(getopt -n "$0"  -o "hj:v:" --long "help,jar:,volume:"  -- "$@")
+[ $? -ne 0 ] && die
+eval set -- "$OPTS"
+
+while true;
+do
+    case "$1" in
+        -h|--help)
+            echo "$USAGE"
+            exit
+            ;;
+
+        -j|--jar)
+            JAR="$(realpath $2)"
+            [ ! -f "$JAR" ] && die "jar $JAR doesn't exit"
+            [ x"$(basename $JAR)" != x"alien-cs.jar" ] && die "please use alien-cs.jar"
+            shift 2
+            ;;
+
+        -v|--volume)
+            SHARED_VOLUME="$(realpath $2)"
+            shift 2
+            ;;
+        --)
+            shift
+            break;;
+    esac
+done
+
+JALIEN_SETUP_DIR="$(realpath $(dirname $(realpath -L $0))/..)"
+TEMPLATES=$JALIEN_SETUP_DIR/bash-setup/templates
+export PATH=$PATH:$JALIEN_SETUP_DIR/bash-setup:$JALIEN_SETUP_DIR/ce-setup
+
+mkdir -p $SHARED_VOLUME
+rm -rf $SHARED_VOLUME/*
+cp $JAR $SHARED_VOLUME
+mkdir -p $SHARED_VOLUME/logs
+touch $SHARED_VOLUME/logs/{setup_log,verify_log,jcentral_stdout}.txt
+
+
+cp $TEMPLATES/docker-compose.yml $SHARED_VOLUME
+cp $JALIEN_SETUP_DIR/xrootd/xrootd-conf/TkAuthz.Authorization $SHARED_VOLUME
+cp $JALIEN_SETUP_DIR/bash-setup/optimiser.sh $SHARED_VOLUME
+chmod 644 $SHARED_VOLUME/TkAuthz.Authorization
+
+cat > $SHARED_VOLUME/env_setup.sh <<EoF
+export vol="\$(dirname \$(realpath \$BASH_SOURCE))"
+certpath="\$vol/globus"
+export ALIENPY_JCENTRAL="JCentral-dev"
+export X509_CERT_DIR="\${certpath}/CA"
+export CERT=\${certpath}/user/usercert.pem
+export KEY=\${certpath}/user/userkey.pem
+export X509_USER_CERT="\${CERT}"
+export X509_USER_KEY="\${KEY}"
+export JALIEN_TOKEN_CERT="\${CERT}"
+export JALIEN_TOKEN_KEY="\${KEY}"
+export JALIEN_HOST="localhost"
+export JALIEN_WSPORT=8097
+
+export apiService="localhost:8098"
+export ldap_server="localhost:8389"
+export ldap_root="o=localhost,dc=localdomain"
+export JALIEN_OPTS="-Dtrusted.certificates.location=\"\${X509_CERT_DIR}\""
+EoF
+
+cat > $SHARED_VOLUME/.env <<EoF
+SHARED_VOLUME=$SHARED_VOLUME
+JALIEN_SETUP_DIR=$JALIEN_SETUP_DIR
+EoF
+
+chmod +x $SHARED_VOLUME/env_setup.sh
+
+### SETUP ###
+CreateCertificates.sh $SHARED_VOLUME
+CreateConfig.sh $SHARED_VOLUME
+
+bash ce-config.sh $SHARED_VOLUME

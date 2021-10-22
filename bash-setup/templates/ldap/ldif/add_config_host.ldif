@@ -1,0 +1,8 @@
+dn: host=localhost.localdomain,ou=Config,ou=JTestSite,ou=Sites,o=localhost,dc=localdomain
+cachedir: $HOME/cache
+tmpdir: $HOME/tmp
+logdir: $HOME/log
+ce: firstce
+host: localhost.localdomain
+objectclass: top
+objectclass: AliEnHostConfig

@@ -1,0 +1,13 @@
+dn: name=firstse,ou=SE,ou=Services,ou=JTestSite,ou=Sites,o=localhost,dc=localdomain
+name: firstse
+port: 8389
+ftdprotocol: cp
+objectClass: top
+objectClass: AliEnSE
+objectClass: AliEnMSS
+objectClass: AliEnSOAPServer
+QoS: disk
+savedir: /root/.j/testVO/SE_storage/firstse
+mss: File
+ioDaemons: file:host=localhost:port=${port}
+host: localhost

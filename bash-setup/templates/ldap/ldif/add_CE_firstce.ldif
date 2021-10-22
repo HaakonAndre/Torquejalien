@@ -1,0 +1,13 @@
+dn: name=firstce,ou=CE,ou=Services,ou=JTestSite,ou=Sites,o=localhost,dc=localdomain
+host: localhost.localdomain
+installmethod: CVMFS
+maxjobs: 3000
+environment: CE_LCGCE=schedd:9618
+environment: USE_JOB_ROUTER=1
+environment: ROUTES_LIST=[ schedd:9618 ]
+maxqueuedjobs: 300
+name: firstce
+objectclass: AliEnCE
+objectclass: top
+ttl: 87000
+type: PBS

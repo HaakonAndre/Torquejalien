@@ -1,0 +1,23 @@
+"USE \`${dataDB}\`;
+LOCK TABLES `L0L` WRITE;
+INSERT INTO `L0L` VALUES (0,'admin',0,'2011-10-06 17:07:26',NULL,NULL,NULL,'',0,NULL,0,NULL,'admin','d',NULL,NULL,'755');
+UNLOCK TABLES;"
+
+//parentdir
+"select entryId from TestConfig.dataDB.L0L where lfn = '';entryId;"
+
+//loop
+"USE \`$dataDB\`;LOCK TABLES `L0L` WRITE;
+INSERT INTO `L0L` VALUES (0,'admin',0,'2011-10-06 17:07:26',NULL,NULL,NULL,'${path}',0,NULL,0,${parentDir},'admin','d',NULL,NULL,'755');
+UNLOCK TABLES;"
+
+select entryId from TestConfig.dataDB.L0L where lfn = '" + path + "';", "entryId
+
+//after loop
+select entryId from TestConfig.dataDB.L0L where lfn = 'path';entryId
+
+//after everything
+"UNLOCK TABLES;
+USE \`${userDB}\`;LOCK TABLES `L0L` WRITE;
+INSERT INTO `L0L` VALUES (0,'admin',0,'2011-10-06 17:07:26',NULL,NULL,NULL,'',0,NULL,0,${parentDir},'admin','d',NULL,NULL,'755');
+UNLOCK TABLES;"

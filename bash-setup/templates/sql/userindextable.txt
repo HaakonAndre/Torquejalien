@@ -1,0 +1,19 @@
+USE `userDB`;
+
+DROP TABLE IF EXISTS `LactuidL`;
+                
+CREATE TABLE `LactuidL` (`entryId` bigint(11) NOT NULL AUTO_INCREMENT,`owner` varchar(20) COLLATE latin1_general_cs NOT NULL,
+				    `replicated` smallint(1) NOT NULL DEFAULT '0',`ctime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+					`guidtime` varchar(8) COLLATE latin1_general_cs DEFAULT NULL,`jobid` int(11) DEFAULT NULL,`aclId` mediumint(11) DEFAULT NULL,
+					`lfn` varchar(255) COLLATE latin1_general_cs DEFAULT NULL,`broken` smallint(1) NOT NULL DEFAULT '0',`expiretime` datetime DEFAULT NULL,
+					`size` bigint(20) NOT NULL DEFAULT '0',`dir` bigint(11) DEFAULT NULL,`gowner` varchar(20) COLLATE latin1_general_cs NOT NULL,
+					`type` char(1) COLLATE latin1_general_cs NOT NULL DEFAULT 'f',`guid` binary(16) DEFAULT NULL,`md5` varchar(32) COLLATE latin1_general_cs DEFAULT NULL,
+					`perm` char(3) COLLATE latin1_general_cs NOT NULL,PRIMARY KEY (`entryId`),UNIQUE KEY `lfn` (`lfn`),KEY `dir` (`dir`),KEY `guid` (`guid`),
+					KEY `type` (`type`), KEY `ctime` (`ctime`),KEY `guidtime` (`guidtime`)
+					) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+
+LOCK TABLES `LactuidL` WRITE;
+
+INSERT INTO `LactuidL` VALUES (0,'username',0,'2011-10-06 17:07:51',NULL,NULL,NULL,'',0,NULL,0,'parentDir','admin','d',NULL,NULL,'755');
+
+UNLOCK TABLES;

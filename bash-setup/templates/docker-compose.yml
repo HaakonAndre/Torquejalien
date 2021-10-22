@@ -1,0 +1,61 @@
+version: "3.3"
+services:
+  JCentral-dev:
+    image: jalien-base
+    command: /jalien-setup/bash-setup/entrypoint.sh
+    hostname: JCentral-dev
+    ports:
+      - 8098:8098 # Java binary serialization
+      - 8097:8097 # JSON WebSocket
+      - 3307:3307 # MySQL
+      - 8389:8389 # LDAP
+    volumes:
+      - $SHARED_VOLUME:/jalien-dev
+      - $JALIEN_SETUP_DIR:/jalien-setup:ro
+    environment:
+      SE_HOST: JCentral-dev-SE
+
+  JCentral-dev-SE:
+    image: xrootd-se
+    entrypoint: bash -c
+    command: xrootd -c /etc/xrootd/xrootd-standalone.cfg
+    hostname: JCentral-dev-SE
+    ports:
+      - 1094:1094 # XRootD
+    volumes:
+      - $SHARED_VOLUME:/jalien-dev
+      - jsite-storage:/shared-volume
+
+  schedd:
+    image: jalien-base
+    command: bash /ce-setup/torque-conf/docker-entrypoint.sh pbsServer
+    environment:
+		TORQUE_NODE: "worker"
+		TORQUE_CLIENT: "localhost.localdomain"
+    volumes:
+    	$JALIEN_SETUP_DIR/ce-setup/torque-conf/torque.conf:/etc/torque/torque.conf
+
+  worker:
+    image: jalien-base
+    command: bash /ce-setup/torque-conf/docker-entrypoint.sh pbsMom
+    environment:
+      TORQUE_HOST: "schedd"
+    volumes:
+      - /cvmfs/alice.cern.ch:/cvmfs/alice.cern.ch
+      - $JALIEN_SETUP_DIR/ce-setup:/ce-setup:ro
+      - $SHARED_VOLUME:/jalien-dev
+
+
+  JCentral-dev-CE:
+    image: "jalien-base"
+    command: bash /ce-setup/ce-entrypoint.sh
+    hostname: "localhost.localdomain"
+    environment:
+      TORQUE_HOST: "schedd"
+    volumes:
+      - /cvmfs/alice.cern.ch:/cvmfs/alice.cern.ch
+      - $SHARED_VOLUME:/jalien-dev
+      - $JALIEN_SETUP_DIR/ce-setup:/ce-setup:ro
+
+volumes:
+  jsite-storage:

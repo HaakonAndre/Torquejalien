@@ -1,0 +1,5 @@
+dn: uid=admin,ou=Roles,o=localhost,dc=localdomain
+objectClass: top
+objectClass: AliEnRole
+uid: admin
+users: admin

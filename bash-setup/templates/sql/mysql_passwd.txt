@@ -1,0 +1,33 @@
+update mysql.user set authentication_string=PASSWORD('sql_pass') where User='root';
+
+delete from mysql.user where user !='root';
+            
+GRANT ALL PRIVILEGES ON *.* TO root IDENTIFIED BY 'sql_pass' WITH GRANT OPTION;
+            
+GRANT ALL PRIVILEGES ON *.* TO root@localhost IDENTIFIED BY 'sql_pass' WITH GRANT OPTION;
+
+flush privileges;
+
+
+CREATE DATABASE IF NOT EXISTS `ADMIN` DEFAULT CHARACTER SET latin1;
+
+LOCK TABLES `proc` WRITE;
+
+INSERT INTO `proc` VALUES ('dataDB','string2binary','FUNCTION','string2binary','SQL','CONTAINS_SQL','YES','INVOKER','my_uuid varchar(36)','binary(16)','return unhex(replace(my_uuid, \'-\', \'\'))','admin@%','2011-10-06 17:07:18','2011-10-06 17:07:18','','','latin1','latin1_swedish_ci','latin1_swedish_ci','return unhex(replace(my_uuid, \'-\', \'\'))');
+            
+INSERT INTO `proc` VALUES ('dataDB','binary2string','FUNCTION','binary2string','SQL','CONTAINS_SQL','YES','INVOKER','my_uuid binary(16)','varchar(36) CHARSET latin1','return insert(insert(insert(insert(hex(my_uuid),9,0,\'-\'),14,0,\'-\'),19,0,\'-\'),24,0,\'-\')','admin@%','2011-10-06 17:07:18','2011-10-06 17:07:18','','','latin1','latin1_swedish_ci','latin1_swedish_ci','return insert(insert(insert(insert(hex(my_uuid),9,0,\'-\'),14,0,\'-\'),19,0,\'-\'),24,0,\'-\')');
+            
+INSERT INTO `proc` VALUES ('dataDB','binary2date','FUNCTION','binary2date','SQL','CONTAINS_SQL','YES','INVOKER','my_uuid binary(16)','char(16) CHARSET latin1','return upper(concat(right(left(hex(my_uuid),16),4), right(left(hex(my_uuid),12),4),left(hex(my_uuid),8)))','admin@%','2011-10-06 17:07:18','2011-10-06 17:07:18','','','latin1','latin1_swedish_ci','latin1_swedish_ci','return upper(concat(right(left(hex(my_uuid),16),4), right(left(hex(my_uuid),12),4),left(hex(my_uuid),8)))');
+            
+INSERT INTO `proc` VALUES ('dataDB','string2date','FUNCTION','string2date','SQL','CONTAINS_SQL','YES','INVOKER','my_uuid varchar(36)','char(16) CHARSET latin1','return upper(concat(right(left(my_uuid,18),4), right(left(my_uuid,13),4),left(my_uuid,8)))','admin@%','2011-10-06 17:07:19','2011-10-06 17:07:19','','','latin1','latin1_swedish_ci','latin1_swedish_ci','return upper(concat(right(left(my_uuid,18),4), right(left(my_uuid,13),4),left(my_uuid,8)))');
+
+            
+INSERT INTO `proc` VALUES ('userDB','string2binary','FUNCTION','string2binary','SQL','CONTAINS_SQL','YES','INVOKER','my_uuid varchar(36)','binary(16)','return unhex(replace(my_uuid, \'-\', \'\'))','admin@%','2011-10-06 17:07:18','2011-10-06 17:07:18','','','latin1','latin1_swedish_ci','latin1_swedish_ci','return unhex(replace(my_uuid, \'-\', \'\'))');
+            
+INSERT INTO `proc` VALUES ('userDB','binary2string','FUNCTION','binary2string','SQL','CONTAINS_SQL','YES','INVOKER','my_uuid binary(16)','varchar(36) CHARSET latin1','return insert(insert(insert(insert(hex(my_uuid),9,0,\'-\'),14,0,\'-\'),19,0,\'-\'),24,0,\'-\')','admin@%','2011-10-06 17:07:18','2011-10-06 17:07:18','','','latin1','latin1_swedish_ci','latin1_swedish_ci','return insert(insert(insert(insert(hex(my_uuid),9,0,\'-\'),14,0,\'-\'),19,0,\'-\'),24,0,\'-\')');
+            
+INSERT INTO `proc` VALUES ('userDB','binary2date','FUNCTION','binary2date','SQL','CONTAINS_SQL','YES','INVOKER','my_uuid binary(16)','char(16) CHARSET latin1','return upper(concat(right(left(hex(my_uuid),16),4), right(left(hex(my_uuid),12),4),left(hex(my_uuid),8)))','admin@%','2011-10-06 17:07:18','2011-10-06 17:07:18','','','latin1','latin1_swedish_ci','latin1_swedish_ci','return upper(concat(right(left(hex(my_uuid),16),4), right(left(hex(my_uuid),12),4),left(hex(my_uuid),8)))');
+            
+INSERT INTO `proc` VALUES ('userDB','string2date','FUNCTION','string2date','SQL','CONTAINS_SQL','YES','INVOKER','my_uuid varchar(36)','char(16) CHARSET latin1','return upper(concat(right(left(my_uuid,18),4), right(left(my_uuid,13),4),left(my_uuid,8)))','admin@%','2011-10-06 17:07:19','2011-10-06 17:07:19','','','latin1','latin1_swedish_ci','latin1_swedish_ci','return upper(concat(right(left(my_uuid,18),4), right(left(my_uuid,13),4),left(my_uuid,8)))');
+
+UNLOCK TABLES;

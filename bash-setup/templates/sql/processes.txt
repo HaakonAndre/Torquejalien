@@ -1,0 +1,712 @@
+-- MySQL dump 10.13  Distrib 5.5.43, for Linux (x86_64)
+--
+-- Host: 127.0.0.1    Database: processes
+-- ------------------------------------------------------
+-- Server version	8.0.20-0ubuntu0.20.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `processes`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `processes` /*!40100 DEFAULT CHARACTER SET latin1 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+USE `processes`;
+
+--
+-- Table structure for table `ACTIONS`
+--
+
+DROP TABLE IF EXISTS `ACTIONS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ACTIONS` (
+  `action` char(40) COLLATE latin1_general_cs NOT NULL,
+  `todo` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`action`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `FAH_WORKDIR`
+--
+
+DROP TABLE IF EXISTS `FAH_WORKDIR`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `FAH_WORKDIR` (
+  `fah_uid` int NOT NULL AUTO_INCREMENT,
+  `queueId` bigint DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`fah_uid`)
+) ENGINE=InnoDB AUTO_INCREMENT=10872 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `FILES_BROKER`
+--
+
+DROP TABLE IF EXISTS `FILES_BROKER`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `FILES_BROKER` (
+  `lfn` varchar(255) COLLATE latin1_general_cs NOT NULL,
+  `queueId` int DEFAULT NULL,
+  `split` int NOT NULL,
+  `sites` varchar(255) COLLATE latin1_general_cs NOT NULL,
+  KEY `split` (`split`),
+  KEY `queueId` (`queueId`),
+  CONSTRAINT `FILES_BROKER_ibfk_1` FOREIGN KEY (`queueId`) REFERENCES `QUEUE` (`queueId`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  CONSTRAINT `FILES_BROKER_ibfk_2` FOREIGN KEY (`split`) REFERENCES `QUEUE` (`queueId`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `HOSTS`
+--
+
+DROP TABLE IF EXISTS `HOSTS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `HOSTS` (
+  `hostId` int NOT NULL AUTO_INCREMENT,
+  `date` int DEFAULT NULL,
+  `maxJobs` int DEFAULT NULL,
+  `cename` varchar(255) COLLATE latin1_general_cs DEFAULT NULL,
+  `Version` char(10) COLLATE latin1_general_cs DEFAULT NULL,
+  `maxqueued` int DEFAULT NULL,
+  `queues` char(50) COLLATE latin1_general_cs DEFAULT NULL,
+  `status` char(10) COLLATE latin1_general_cs DEFAULT NULL,
+  `hostPort` int DEFAULT NULL,
+  `rating` float DEFAULT NULL,
+  `connected` int DEFAULT NULL,
+  `hostName` char(255) COLLATE latin1_general_cs DEFAULT NULL,
+  `siteId` int NOT NULL,
+  `commandName` char(255) COLLATE latin1_general_cs DEFAULT NULL,
+  `adminName` char(100) COLLATE latin1_general_cs DEFAULT NULL,
+  PRIMARY KEY (`hostId`),
+  UNIQUE KEY `HOSTS_hostname` (`hostName`)
+) ENGINE=InnoDB AUTO_INCREMENT=2437 DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `JOBAGENT`
+--
+
+DROP TABLE IF EXISTS `JOBAGENT`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `JOBAGENT` (
+  `entryId` int NOT NULL AUTO_INCREMENT,
+  `priority` int DEFAULT NULL,
+  `noce` varchar(1000) COLLATE latin1_general_cs DEFAULT NULL,
+  `fileBroker` tinyint(1) NOT NULL DEFAULT '0',
+  `partition` varchar(1000) COLLATE latin1_general_cs DEFAULT NULL,
+  `disk` int DEFAULT NULL,
+  `cpucores` int DEFAULT 1,
+  `ttl` int DEFAULT NULL,
+  `ce` varchar(1000) COLLATE latin1_general_cs DEFAULT NULL,
+  `userId` int NOT NULL,
+  `packages` varchar(1000) COLLATE latin1_general_cs DEFAULT NULL,
+  `site` varchar(1000) COLLATE latin1_general_cs DEFAULT NULL,
+  `counter` int NOT NULL DEFAULT '0',
+  `price` float DEFAULT '1',
+  `oldestQueueId` int DEFAULT '0',
+  `revision` int DEFAULT '0',
+  PRIMARY KEY (`entryId`),
+  KEY `priority` (`priority`),
+  KEY `ttl` (`ttl`),
+  KEY `userId` (`userId`),
+  KEY `price` (`price`),
+  KEY `oldestQueueId` (`oldestQueueId`),
+  CONSTRAINT `JOBAGENT_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `QUEUE_USER` (`userId`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=197895043 DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `JOBMESSAGES`
+--
+
+DROP TABLE IF EXISTS `JOBMESSAGES`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `JOBMESSAGES` (
+  `entryId` bigint NOT NULL AUTO_INCREMENT,
+  `tag` varchar(40) COLLATE latin1_general_cs DEFAULT NULL,
+  `timestamp` int DEFAULT NULL,
+  `procinfo` varchar(500) COLLATE latin1_general_cs DEFAULT NULL,
+  `jobId` int DEFAULT NULL,
+  PRIMARY KEY (`entryId`)
+) ENGINE=InnoDB AUTO_INCREMENT=9277509106 DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `JOBSTOMERGE`
+--
+
+DROP TABLE IF EXISTS `JOBSTOMERGE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `JOBSTOMERGE` (
+  `masterId` int NOT NULL,
+  PRIMARY KEY (`masterId`),
+  CONSTRAINT `JOBSTOMERGE_ibfk_1` FOREIGN KEY (`masterId`) REFERENCES `QUEUE` (`queueId`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `JOBTOKEN`
+--
+
+ DROP TABLE IF EXISTS `JOBTOKEN`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!40101 SET character_set_client = utf8 */;
+ CREATE TABLE `JOBTOKEN` (
+   `jobId` int NOT NULL DEFAULT '0',
+   `userName` char(20) COLLATE latin1_general_cs DEFAULT NULL,
+   `jobToken` char(255) COLLATE latin1_general_cs DEFAULT NULL,
+   KEY `jobId` (`jobId`),
+   CONSTRAINT `JOBTOKEN_ibfk_1` FOREIGN KEY (`jobId`) REFERENCES `QUEUE` (`queueId`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `MESSAGES`
+--
+
+DROP TABLE IF EXISTS `MESSAGES`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MESSAGES` (
+  `ID` int NOT NULL,
+  `Ack` varchar(255) COLLATE latin1_general_cs DEFAULT NULL,
+  `TargetService` varchar(100) COLLATE latin1_general_cs DEFAULT NULL,
+  `MessageArgs` varchar(100) COLLATE latin1_general_cs DEFAULT NULL,
+  `Message` varchar(100) COLLATE latin1_general_cs NOT NULL DEFAULT '',
+  `TargetHost` varchar(100) COLLATE latin1_general_cs DEFAULT NULL,
+  `Expires` int DEFAULT NULL,
+  PRIMARY KEY (`ID`,`Message`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `PRIORITY`
+--
+
+DROP TABLE IF EXISTS `PRIORITY`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `PRIORITY` (
+  `userId` int NOT NULL,
+  `priority` float NOT NULL DEFAULT '0',
+  `maxparallelJobs` int NOT NULL DEFAULT '0',
+  `unfinishedJobsLast24h` int NOT NULL DEFAULT '0',
+  `userload` float NOT NULL DEFAULT '0',
+  `nominalparallelJobs` int NOT NULL DEFAULT '0',
+  `maxTotalRunningTime` bigint NOT NULL DEFAULT '0',
+  `maxUnfinishedJobs` int NOT NULL DEFAULT '0',
+  `computedpriority` float NOT NULL DEFAULT '0',
+  `maxTotalCpuCost` float NOT NULL DEFAULT '0',
+  `totalRunningTimeLast24h` bigint NOT NULL DEFAULT '0',
+  `waiting` int NOT NULL DEFAULT '0',
+  `running` int NOT NULL DEFAULT '0',
+  `totalCpuCostLast24h` float NOT NULL DEFAULT '0',
+  PRIMARY KEY (`userId`),
+  KEY `userId` (`userId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `QUEUE`
+--
+
+DROP TABLE IF EXISTS `QUEUE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `QUEUE` (
+  `queueId` int NOT NULL AUTO_INCREMENT,
+  `priority` tinyint DEFAULT NULL,
+  `statusId` tinyint NOT NULL,
+  `submitHostId` int DEFAULT NULL,
+  `finalPrice` float DEFAULT NULL,
+  `sent` int DEFAULT NULL,
+  `split` int DEFAULT NULL,
+  `nodeId` int DEFAULT NULL,
+  `execHostId` int DEFAULT NULL,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `agentId` int DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `finished` int DEFAULT NULL,
+  `masterjob` int DEFAULT '0',
+  `cpucores` int DEFAULT NULL,
+  `splitting` int DEFAULT NULL,
+  `notifyId` int DEFAULT NULL,
+  `optimized` int DEFAULT '0',
+  `commandId` int DEFAULT NULL,
+  `error` int DEFAULT NULL,
+  `resubmission` int NOT NULL DEFAULT '0',
+  `received` int DEFAULT NULL,
+  `validate` int DEFAULT NULL,
+  `merging` varchar(64) COLLATE latin1_general_cs DEFAULT NULL,
+  `userId` int DEFAULT NULL,
+  `chargeStatus` varchar(20) COLLATE latin1_general_cs DEFAULT NULL,
+  `siteId` int NOT NULL DEFAULT '1',
+  `started` int DEFAULT NULL,
+  `expires` int DEFAULT NULL,
+  `remoteTimeout` int DEFAULT NULL,
+  PRIMARY KEY (`queueId`),
+  KEY `notifyId` (`notifyId`),
+  KEY `userId` (`userId`),
+  KEY `execHostId` (`execHostId`),
+  KEY `submitHostId` (`submitHostId`),
+  KEY `nodeId` (`nodeId`),
+  KEY `commandId` (`commandId`),
+  KEY `split` (`split`),
+  KEY `received` (`received`),
+  KEY `agentId` (`agentId`),
+  KEY `priority` (`priority`),
+  KEY `sent` (`sent`),
+  KEY `status_idx` (`statusId`),
+  KEY `agent_status_queue` (`agentId`,`statusId`,`queueId`),
+  KEY `siteId` (`siteId`),
+  CONSTRAINT `QUEUE_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `QUEUE_STATUS` (`statusId`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  CONSTRAINT `QUEUE_ibfk_2` FOREIGN KEY (`notifyId`) REFERENCES `QUEUE_NOTIFY` (`notifyId`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  CONSTRAINT `QUEUE_ibfk_3` FOREIGN KEY (`userId`) REFERENCES `QUEUE_USER` (`userId`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  CONSTRAINT `QUEUE_ibfk_4` FOREIGN KEY (`execHostId`) REFERENCES `QUEUE_HOST` (`hostId`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  CONSTRAINT `QUEUE_ibfk_5` FOREIGN KEY (`submitHostId`) REFERENCES `QUEUE_HOST` (`hostId`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  CONSTRAINT `QUEUE_ibfk_6` FOREIGN KEY (`nodeId`) REFERENCES `QUEUE_HOST` (`hostId`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  CONSTRAINT `QUEUE_ibfk_7` FOREIGN KEY (`commandId`) REFERENCES `QUEUE_COMMAND` (`commandId`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  CONSTRAINT `QUEUE_ibfk_8` FOREIGN KEY (`siteId`) REFERENCES `SITEQUEUES` (`siteId`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=1888757065 DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+DROP TABLE IF EXISTS `QUEUEJDL`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `QUEUEJDL` (
+  `queueId` int NOT NULL,
+  `origJdl` mediumtext COLLATE latin1_general_cs,
+  `resultsJdl` mediumtext COLLATE latin1_general_cs,
+  `path` varchar(255) COLLATE latin1_general_cs DEFAULT NULL,
+  KEY `queueId` (`queueId`) KEY_BLOCK_SIZE=4,
+  CONSTRAINT `QUEUEJDL_ibfk_1` FOREIGN KEY (`queueId`) REFERENCES `QUEUE` (`queueId`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPRESSED KEY_BLOCK_SIZE=2;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `QUEUEPROC`
+--
+
+DROP TABLE IF EXISTS `QUEUEPROC`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `QUEUEPROC` (
+  `queueId` int NOT NULL,
+  `lastupdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `maxrsize` float DEFAULT NULL,
+  `cputime` int DEFAULT NULL,
+  `ncpu` int DEFAULT NULL,
+  `batchid` varchar(255) COLLATE latin1_general_cs DEFAULT NULL,
+  `cost` float DEFAULT NULL,
+  `cpufamily` int DEFAULT NULL,
+  `cpu` float DEFAULT NULL,
+  `rsize` int DEFAULT NULL,
+  `spyurl` varchar(64) COLLATE latin1_general_cs DEFAULT NULL,
+  `runtime` varchar(20) COLLATE latin1_general_cs DEFAULT NULL,
+  `mem` float DEFAULT NULL,
+  `si2k` float DEFAULT NULL,
+  `cpuspeed` int DEFAULT NULL,
+  `vsize` int DEFAULT NULL,
+  `runtimes` int DEFAULT NULL,
+  `procinfotime` int DEFAULT NULL,
+  `maxvsize` float DEFAULT NULL,
+  KEY `queueId` (`queueId`),
+  CONSTRAINT `QUEUEPROC_ibfk_1` FOREIGN KEY (`queueId`) REFERENCES `QUEUE` (`queueId`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `QUEUE_COMMAND`
+--
+
+DROP TABLE IF EXISTS `QUEUE_COMMAND`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `QUEUE_COMMAND` (
+  `commandId` int NOT NULL AUTO_INCREMENT,
+  `command` varchar(255) COLLATE latin1_general_cs NOT NULL,
+  PRIMARY KEY (`commandId`),
+  UNIQUE KEY `command` (`command`)
+) ENGINE=InnoDB AUTO_INCREMENT=1037510 DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `QUEUE_HOST`
+--
+
+DROP TABLE IF EXISTS `QUEUE_HOST`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `QUEUE_HOST` (
+  `hostId` int NOT NULL AUTO_INCREMENT,
+  `host` varchar(255) COLLATE latin1_general_cs NOT NULL,
+  PRIMARY KEY (`hostId`),
+  UNIQUE KEY `host` (`host`)
+) ENGINE=InnoDB AUTO_INCREMENT=12277789 DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `QUEUE_HOST_backup`
+--
+
+DROP TABLE IF EXISTS `QUEUE_HOST_backup`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `QUEUE_HOST_backup` (
+  `hostId` int NOT NULL DEFAULT '0',
+  `host` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `QUEUE_HOST_temp`
+--
+
+DROP TABLE IF EXISTS `QUEUE_HOST_temp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `QUEUE_HOST_temp` (
+  `hostId` int NOT NULL AUTO_INCREMENT,
+  `host` varchar(255) NOT NULL,
+  PRIMARY KEY (`hostId`),
+  UNIQUE KEY `host` (`host`)
+) ENGINE=InnoDB AUTO_INCREMENT=11928431 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `QUEUE_NOTIFY`
+--
+
+DROP TABLE IF EXISTS `QUEUE_NOTIFY`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `QUEUE_NOTIFY` (
+  `notifyId` int NOT NULL AUTO_INCREMENT,
+  `notify` varchar(255) COLLATE latin1_general_cs NOT NULL,
+  PRIMARY KEY (`notifyId`),
+  UNIQUE KEY `notify` (`notify`)
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `QUEUE_STATUS`
+--
+
+DROP TABLE IF EXISTS `QUEUE_STATUS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `QUEUE_STATUS` (
+  `statusId` tinyint NOT NULL,
+  `status` varchar(12) COLLATE latin1_general_cs NOT NULL,
+  PRIMARY KEY (`statusId`),
+  UNIQUE KEY `status` (`status`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `QUEUE_TMP_EXP`
+--
+
+DROP TABLE IF EXISTS `QUEUE_TMP_EXP`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `QUEUE_TMP_EXP` (
+  `queueId` int NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `QUEUE_TOKEN`
+--
+
+DROP TABLE IF EXISTS `QUEUE_TOKEN`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `QUEUE_TOKEN` (
+  `queueId` int NOT NULL,
+  `username` char(20) COLLATE latin1_general_cs NOT NULL,
+  `resubmission` int NOT NULL,
+  KEY `queueId` (`queueId`),
+  CONSTRAINT `QUEUE_TOKEN_ibfk_1` FOREIGN KEY (`queueId`) REFERENCES `QUEUE` (`queueId`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `QUEUE_TRACE`
+--
+
+DROP TABLE IF EXISTS `QUEUE_TRACE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `QUEUE_TRACE` (
+  `queueId` int NOT NULL,
+  `tag` int NOT NULL,
+  `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `message` text COLLATE latin1_general_cs NOT NULL,
+  KEY `mtime` (`mtime`),
+  KEY `queueId` (`queueId`),
+  CONSTRAINT `QUEUE_TRACE_ibfk_1` FOREIGN KEY (`queueId`) REFERENCES `QUEUE` (`queueId`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs ROW_FORMAT=COMPRESSED KEY_BLOCK_SIZE=4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `QUEUE_USER`
+--
+
+DROP TABLE IF EXISTS `QUEUE_USER`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `QUEUE_USER` (
+  `userId` int NOT NULL AUTO_INCREMENT,
+  `user` varchar(64) COLLATE latin1_general_cs NOT NULL,
+  PRIMARY KEY (`userId`),
+  UNIQUE KEY `user` (`user`)
+) ENGINE=InnoDB AUTO_INCREMENT=1235890 DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Temporary table structure for view `QUEUE_VIEW`
+--
+
+DROP TABLE IF EXISTS `QUEUE_VIEW`;
+/*!50001 DROP VIEW IF EXISTS `QUEUE_VIEW`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `QUEUE_VIEW` (
+  `queueId` tinyint NOT NULL,
+  `statusId` tinyint NOT NULL,
+  `userId` tinyint NOT NULL,
+  `priority` tinyint NOT NULL,
+  `submitHostId` tinyint NOT NULL,
+  `finalPrice` tinyint NOT NULL,
+  `sent` tinyint NOT NULL,
+  `split` tinyint NOT NULL,
+  `nodeId` tinyint NOT NULL,
+  `execHostId` tinyint NOT NULL,
+  `mtime` tinyint NOT NULL,
+  `agentId` tinyint NOT NULL,
+  `price` tinyint NOT NULL,
+  `finished` tinyint NOT NULL,
+  `masterjob` tinyint NOT NULL,
+  `cpucores` tinyint NOT NULL,
+  `splitting` tinyint NOT NULL,
+  `notifyId` tinyint NOT NULL,
+  `optimized` tinyint NOT NULL,
+  `commandId` tinyint NOT NULL,
+  `error` tinyint NOT NULL,
+  `resubmission` tinyint NOT NULL,
+  `received` tinyint NOT NULL,
+  `validate` tinyint NOT NULL,
+  `merging` tinyint NOT NULL,
+  `chargeStatus` tinyint NOT NULL,
+  `siteId` tinyint NOT NULL,
+  `started` tinyint NOT NULL,
+  `expires` tinyint NOT NULL,
+  `user` tinyint NOT NULL,
+  `status` tinyint NOT NULL,
+  `origJdl` tinyint NOT NULL,
+  `resultsJdl` tinyint NOT NULL,
+  `path` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `REVISION`
+--
+
+DROP TABLE IF EXISTS `REVISION`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `REVISION` (
+  `package` varchar(255) COLLATE latin1_general_ci NOT NULL,
+  `revision` int DEFAULT '0',
+  PRIMARY KEY (`package`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `SITEQUEUES`
+--
+
+DROP TABLE IF EXISTS `SITEQUEUES`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `SITEQUEUES` (
+  `siteId` int NOT NULL AUTO_INCREMENT,
+  `DONE_WARN` int NOT NULL DEFAULT '0',
+  `ERROR_EW` int NOT NULL DEFAULT '0',
+  `runload` float DEFAULT NULL,
+  `FORCEMERGE` int NOT NULL DEFAULT '0',
+  `WAITING` int NOT NULL DEFAULT '0',
+  `ERROR_M` int NOT NULL DEFAULT '0',
+  `ERROR_SV` int NOT NULL DEFAULT '0',
+  `FAILED` int NOT NULL DEFAULT '0',
+  `IDLE` int NOT NULL DEFAULT '0',
+  `SAVED` int NOT NULL DEFAULT '0',
+  `A_STAGED` int NOT NULL DEFAULT '0',
+  `ERROR_RE` int NOT NULL DEFAULT '0',
+  `blocked` varchar(20) COLLATE latin1_general_cs NOT NULL DEFAULT 'locked',
+  `INCORRECT` int NOT NULL DEFAULT '0',
+  `cost` float DEFAULT NULL,
+  `ERROR_A` int NOT NULL DEFAULT '0',
+  `timeblocked` datetime DEFAULT NULL,
+  `MERGING` int NOT NULL DEFAULT '0',
+  `DONE` int NOT NULL DEFAULT '0',
+  `ERROR_I` int NOT NULL DEFAULT '0',
+  `INTERACTIV` int NOT NULL DEFAULT '0',
+  `ERROR_S` int NOT NULL DEFAULT '0',
+  `SAVED_WARN` int NOT NULL DEFAULT '0',
+  `STARTED` int NOT NULL DEFAULT '0',
+  `EXPIRED` int NOT NULL DEFAULT '0',
+  `KILLED` int NOT NULL DEFAULT '0',
+  `ERROR_V` int NOT NULL DEFAULT '0',
+  `TO_STAGE` int NOT NULL DEFAULT '0',
+  `maxqueued` int NOT NULL DEFAULT '0',
+  `INSERTING` int NOT NULL DEFAULT '0',
+  `SPLITTING` int NOT NULL DEFAULT '0',
+  `jdlAgent` text COLLATE latin1_general_cs,
+  `queueload` float NOT NULL DEFAULT '0',
+  `status` varchar(25) COLLATE latin1_general_cs NOT NULL DEFAULT 'new',
+  `OVER_WAITING` int NOT NULL DEFAULT '0',
+  `ERROR_VN` int NOT NULL DEFAULT '0',
+  `ASSIGNED` int NOT NULL DEFAULT '0',
+  `FAULTY` int NOT NULL DEFAULT '0',
+  `ERROR_VT` int NOT NULL DEFAULT '0',
+  `ZOMBIE` int NOT NULL DEFAULT '0',
+  `ERROR_IB` int NOT NULL DEFAULT '0',
+  `SPLIT` int NOT NULL DEFAULT '0',
+  `jdl` mediumtext COLLATE latin1_general_cs,
+  `UPDATING` int NOT NULL DEFAULT '0',
+  `ERROR_SPLT` int NOT NULL DEFAULT '0',
+  `RUNNING` int NOT NULL DEFAULT '0',
+  `site` varchar(40) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `statustime` int NOT NULL DEFAULT '0',
+  `ERROR_E` int NOT NULL DEFAULT '0',
+  `maxrunning` int NOT NULL DEFAULT '0',
+  `SAVING` int NOT NULL DEFAULT '0',
+  `STAGING` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`siteId`),
+  UNIQUE KEY `site` (`site`)
+) ENGINE=InnoDB AUTO_INCREMENT=303 DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `SITES`
+--
+
+DROP TABLE IF EXISTS `SITES`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `SITES` (
+  `siteId` int NOT NULL AUTO_INCREMENT,
+  `masterHostId` int DEFAULT NULL,
+  `record` char(255) COLLATE latin1_general_cs DEFAULT NULL,
+  `latitude` float DEFAULT NULL,
+  `url` char(255) COLLATE latin1_general_cs DEFAULT NULL,
+  `longitude` float DEFAULT NULL,
+  `location` char(255) COLLATE latin1_general_cs DEFAULT NULL,
+  `siteName` char(255) COLLATE latin1_general_cs DEFAULT NULL,
+  `domain` char(30) COLLATE latin1_general_cs DEFAULT NULL,
+  `adminName` char(100) COLLATE latin1_general_cs DEFAULT NULL,
+  PRIMARY KEY (`siteId`)
+) ENGINE=InnoDB AUTO_INCREMENT=933 DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `STAGING`
+--
+
+DROP TABLE IF EXISTS `STAGING`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `STAGING` (
+  `queueId` int NOT NULL,
+  `staging_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY `queueId` (`queueId`),
+  CONSTRAINT `STAGING_ibfk_1` FOREIGN KEY (`queueId`) REFERENCES `QUEUE` (`queueId`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `TESTTABLE`
+--
+
+DROP TABLE IF EXISTS `TESTTABLE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `TESTTABLE` (
+  `id` int NOT NULL,
+  `value` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `TODELETE`
+--
+
+DROP TABLE IF EXISTS `TODELETE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `TODELETE` (
+  `masterid` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Current Database: `processes`
+--
+
+USE `processes`;
+LOCK TABLES SITEQUEUES WRITE;
+insert into SITEQUEUES (siteId,runload,blocked,cost,timeblocked,maxqueued,status,site,statustime,maxrunning) values (1,0,"open", NULL,NULL,10,"down","ALICE::JTESTSITE::FIRSTCE",0,100);
+UNLOCK TABLES;
+--
+-- Final view structure for view `QUEUE_VIEW`
+--
+
+/*!50001 DROP TABLE IF EXISTS `QUEUE_VIEW`*/;
+/*!50001 DROP VIEW IF EXISTS `QUEUE_VIEW`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = latin1 */;
+/*!50001 SET character_set_results     = latin1 */;
+/*!50001 SET collation_connection      = latin1_swedish_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `QUEUE_VIEW` AS select `QUEUE`.`queueId` AS `queueId`,`QUEUE`.`statusId` AS `statusId`,`QUEUE`.`userId` AS `userId`,`QUEUE`.`priority` AS `priority`,`QUEUE`.`submitHostId` AS `submitHostId`,`QUEUE`.`finalPrice` AS `finalPrice`,`QUEUE`.`sent` AS `sent`,`QUEUE`.`split` AS `split`,`QUEUE`.`nodeId` AS `nodeId`,`QUEUE`.`execHostId` AS `execHostId`,`QUEUE`.`mtime` AS `mtime`,`QUEUE`.`agentId` AS `agentId`,`QUEUE`.`price` AS `price`,`QUEUE`.`finished` AS `finished`,`QUEUE`.`masterjob` AS `masterjob`,`QUEUE`.`cpucores` AS `cpucores`,`QUEUE`.`splitting` AS `splitting`,`QUEUE`.`notifyId` AS `notifyId`,`QUEUE`.`optimized` AS `optimized`,`QUEUE`.`commandId` AS `commandId`,`QUEUE`.`error` AS `error`,`QUEUE`.`resubmission` AS `resubmission`,`QUEUE`.`received` AS `received`,`QUEUE`.`validate` AS `validate`,`QUEUE`.`merging` AS `merging`,`QUEUE`.`chargeStatus` AS `chargeStatus`,`QUEUE`.`siteId` AS `siteId`,`QUEUE`.`started` AS `started`,`QUEUE`.`expires` AS `expires`,`QUEUE_USER`.`user` AS `user`,`QUEUE_STATUS`.`status` AS `status`,`QUEUEJDL`.`origJdl` AS `origJdl`,`QUEUEJDL`.`resultsJdl` AS `resultsJdl`,`QUEUEJDL`.`path` AS `path` from (((`QUEUE` join `QUEUE_USER` on((`QUEUE`.`userId` = `QUEUE_USER`.`userId`))) join `QUEUE_STATUS` on((`QUEUE`.`statusId` = `QUEUE_STATUS`.`statusId`))) join `QUEUEJDL` on((`QUEUE`.`queueId` = `QUEUEJDL`.`queueId`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2020-07-23 16:38:25

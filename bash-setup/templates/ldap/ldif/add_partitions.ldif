@@ -1,0 +1,4 @@
+dn: ou=Partitions,o=localhost,dc=localdomain
+objectClass: top
+objectClass: organizationalUnit
+ou: Partitions

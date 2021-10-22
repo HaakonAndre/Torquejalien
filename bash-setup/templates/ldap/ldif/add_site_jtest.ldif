@@ -1,0 +1,10 @@
+dn: ou=JTestSite,ou=Sites,o=localhost,dc=localdomain
+accountName: JTestSite
+logdir: /tmp
+cachedir: /tmp
+objectClass: top
+objectClass: organizationalUnit
+objectClass: AliEnSite
+ou: JTestSite
+domain: localdomain
+tmpdir: /tmp

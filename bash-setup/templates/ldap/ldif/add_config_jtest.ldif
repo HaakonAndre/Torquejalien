@@ -1,0 +1,4 @@
+dn: ou=Config,ou=JTestSite,ou=Sites,o=localhost,dc=localdomain
+objectClass: top
+objectClass: organizationalUnit
+ou: Config

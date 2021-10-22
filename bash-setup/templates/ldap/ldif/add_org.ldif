@@ -1,0 +1,4 @@
+dn: o=localhost,dc=localdomain
+objectClass: top
+objectClass: organization
+o: localhost

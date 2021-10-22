@@ -1,0 +1,386 @@
+dn: cn={3}alien
+objectClass: olcSchemaConfig
+cn: {3}alien
+olcObjectIdentifier: {0}ALIEN_BASE 1.3.6.1.4.1.96.1.1
+olcObjectIdentifier: {1}AliEnVO ALIEN_BASE:1
+olcObjectIdentifier: {2}AliEnVOConfig ALIEN_BASE:2
+olcObjectIdentifier: {3}AliEnUser ALIEN_BASE:3
+olcObjectIdentifier: {4}AliEnPackage ALIEN_BASE:4
+olcObjectIdentifier: {5}AliEnMSS ALIEN_BASE:5
+olcObjectIdentifier: {6}AliEnSOAPServer ALIEN_BASE:6
+olcObjectIdentifier: {7}AliEnSE ALIEN_BASE:7
+olcObjectIdentifier: {8}AliEnCE ALIEN_BASE:8
+olcObjectIdentifier: {9}AliEnFTD ALIEN_BASE:9
+olcObjectIdentifier: {10}AliEnSite ALIEN_BASE:10
+olcObjectIdentifier: {11}AliEnHostConfig ALIEN_BASE:11
+olcObjectIdentifier: {12}AliEnRole ALIEN_BASE:12
+olcObjectIdentifier: {13}AliEnPartition ALIEN_BASE:13
+olcObjectIdentifier: {14}AliEnCLC ALIEN_BASE:14
+olcObjectIdentifier: {15}AliEnTCPROUTER ALIEN_BASE:15
+olcObjectIdentifier: {16}AliEnGASMODULE ALIEN_BASE:16
+olcObjectIdentifier: {17}AliEngContainer ALIEN_BASE:17
+olcObjectIdentifier: {18}AliEngContainerJudge ALIEN_BASE:18
+olcObjectIdentifier: {19}AliEngContainerService ALIEN_BASE:19
+olcObjectIdentifier: {20}AliEngContainerServiceGAS ALIEN_BASE:20
+olcObjectIdentifier: {21}AliEngContainerServiceExWrapper ALIEN_BASE:21
+olcObjectIdentifier: {22}AliEnPackMan ALIEN_BASE:22
+olcObjectIdentifier: {23}AliEnMonaLisa ALIEN_BASE:23
+olcObjectIdentifier: {24}AliEnApiService ALIEN_BASE:24
+olcObjectIdentifier: {25}AliEnInstitution ALIEN_BASE:25
+olcAttributeTypes: {0}( AliEnVO:1 NAME 'ldapHost' SUP name )
+olcAttributeTypes: {1}( AliEnVO:2 NAME 'ldapDN' SUP name )
+olcAttributeTypes: {2}( AliEnVOConfig:1 NAME 'proxyPort' SUP name )
+olcAttributeTypes: {3}( AliEnVOConfig:2 NAME 'proxyHost' SUP name )
+olcAttributeTypes: {4}( AliEnVOConfig:3 NAME 'authPort' SUP name )
+olcAttributeTypes: {5}( AliEnVOConfig:4 NAME 'authenDatabase' SUP name )
+olcAttributeTypes: {6}( AliEnVOConfig:5 NAME 'authenHost' SUP name )
+olcAttributeTypes: {7}( AliEnVOConfig:6 NAME 'authenDriver' SUP name )
+olcAttributeTypes: {8}( AliEnVOConfig:7 NAME 'authHost' SUP name )
+olcAttributeTypes: {9}( AliEnVOConfig:8 NAME 'catalogHost' SUP name )
+olcAttributeTypes: {10}( AliEnVOConfig:9 NAME 'catalogPort' SUP name )
+olcAttributeTypes: {11}( AliEnVOConfig:10 NAME 'catalogDatabase' SUP name )
+olcAttributeTypes: {12}( AliEnVOConfig:11 NAME 'catalogDriver' SUP name )
+olcAttributeTypes: {13}( AliEnVOConfig:12 NAME 'queuePort' SUP name )
+olcAttributeTypes: {14}( AliEnVOConfig:13 NAME 'queueHost' SUP name )
+olcAttributeTypes: {15}( AliEnVOConfig:14 NAME 'queueDatabase' SUP name )
+olcAttributeTypes: {16}( AliEnVOConfig:15 NAME 'queueDriver' SUP name )
+olcAttributeTypes: {17}( AliEnVOConfig:16 NAME 'queueDbHost' SUP name )
+olcAttributeTypes: {18}( AliEnVOConfig:17 NAME 'logPort' SUP name )
+olcAttributeTypes: {19}( AliEnVOConfig:18 NAME 'logHost' SUP name )
+olcAttributeTypes: {20}( AliEnVOConfig:19 NAME 'userDir' SUP name )
+olcAttributeTypes: {21}( AliEnVOConfig:20 NAME 'clusterMonitorUser' SUP name )
+olcAttributeTypes: {22}( AliEnVOConfig:21 NAME 'isPort' SUP name )
+olcAttributeTypes: {23}( AliEnVOConfig:22 NAME 'isDatabase' SUP name )
+olcAttributeTypes: {24}( AliEnVOConfig:23 NAME 'isDriver' SUP name )
+olcAttributeTypes: {25}( AliEnVOConfig:24 NAME 'isHost' SUP name )
+olcAttributeTypes: {26}( AliEnVOConfig:25 NAME 'isDbHost' SUP name )
+olcAttributeTypes: {27}( AliEnVOConfig:26 NAME 'clustermonitorPort' SUP name )
+olcAttributeTypes: {28}( AliEnVOConfig:27 NAME 'processPort' SUP name )
+olcAttributeTypes: {29}( AliEnVOConfig:28 NAME 'brokerPort' SUP name )
+olcAttributeTypes: {30}( AliEnVOConfig:29 NAME 'brokerHost' SUP name )
+olcAttributeTypes: {31}( AliEnVOConfig:30 NAME 'transferManagerAddress' SUP na
+ me )
+olcAttributeTypes: {32}( AliEnVOConfig:31 NAME 'transferBrokerAddress' SUP nam
+ e )
+olcAttributeTypes: {33}( AliEnVOConfig:32 NAME 'transferOptimizerAddress' SUP 
+ name )
+olcAttributeTypes: {34}( AliEnVOConfig:33 NAME 'transferDatabase' SUP name )
+olcAttributeTypes: {35}( AliEnVOConfig:34 NAME 'jobOptimizerAddress' SUP name 
+ )
+olcAttributeTypes: {36}( AliEnVOConfig:35 NAME 'jobDatabase' SUP name )
+olcAttributeTypes: {37}( AliEnVOConfig:36 NAME 'ldapmanager' SUP name )
+olcAttributeTypes: {38}( AliEnVOConfig:37 NAME 'catalogueDatabase' SUP name )
+olcAttributeTypes: {39}( AliEnVOConfig:38 NAME 'catalogueOptimizerAddress' SUP
+  name )
+olcAttributeTypes: {40}( AliEnVOConfig:39 NAME 'authenSubject' SUP name )
+olcAttributeTypes: {41}( AliEnVOConfig:40 NAME 'nwsPort' SUP name )
+olcAttributeTypes: {42}( AliEnVOConfig:41 NAME 'nwsDatabase' SUP name )
+olcAttributeTypes: {43}( AliEnVOConfig:42 NAME 'nwsDriver' SUP name )
+olcAttributeTypes: {44}( AliEnVOConfig:43 NAME 'nwsHost' SUP name )
+olcAttributeTypes: {45}( AliEnVOConfig:44 NAME 'nwsDbHost' SUP name )
+olcAttributeTypes: {46}( AliEnVOConfig:45 NAME 'monalisaLUS' SUP name )
+olcAttributeTypes: {47}( AliEnVOConfig:46 NAME 'monalisaGroup' SUP name )
+olcAttributeTypes: {48}( AliEnVOConfig:47 NAME 'proofPort' SUP name )
+olcAttributeTypes: {49}( AliEnVOConfig:48 NAME 'proofHost' SUP name )
+olcAttributeTypes: {50}( AliEnVOConfig:49 NAME 'proofDatabase' SUP name )
+olcAttributeTypes: {51}( AliEnVOConfig:50 NAME 'proofDriver' SUP name )
+olcAttributeTypes: {52}( AliEnVOConfig:51 NAME 'proofDbHost' SUP name )
+olcAttributeTypes: {53}( AliEnVOConfig:52 NAME 'proofMuxPortRange' SUP name )
+olcAttributeTypes: {54}( AliEnVOConfig:53 NAME 'proofCryptPassword' SUP name )
+olcAttributeTypes: {55}( AliEnVOConfig:54 NAME 'proofLogin' SUP name )
+olcAttributeTypes: {56}( AliEnVOConfig:55 NAME 'proofTimeout' SUP name )
+olcAttributeTypes: {57}( AliEnVOConfig:56 NAME 'proofMasterPort' SUP name )
+olcAttributeTypes: {58}( AliEnVOConfig:57 NAME 'proofPackage' SUP name )
+olcAttributeTypes: {59}( AliEnVOConfig:58 NAME 'jobManagerAddress' SUP name )
+olcAttributeTypes: {60}( AliEnVOConfig:59 NAME 'jobBrokerAddress' SUP name )
+olcAttributeTypes: {61}( AliEnVOConfig:60 NAME 'webserverURL' SUP name )
+olcAttributeTypes: {62}( AliEnVOConfig:61 NAME 'myproxyServer' SUP name )
+olcAttributeTypes: {63}( AliEnVOConfig:62 NAME 'gContainerAddress' SUP name )
+olcAttributeTypes: {64}( AliEnVOConfig:63 NAME 'rlsAddress' SUP name )
+olcAttributeTypes: {65}( AliEnVOConfig:64 NAME 'portalUrl' SUP name )
+olcAttributeTypes: {66}( AliEnVOConfig:65 NAME 'vomsServer' SUP name )
+olcAttributeTypes: {67}( AliEnVOConfig:66 NAME 'apiServer' SUP name )
+olcAttributeTypes: {68}( AliEnVOConfig:67 NAME 'jabberServer' SUP name )
+olcAttributeTypes: {69}( AliEnVOConfig:68 NAME 'agentApiProxy' SUP name )
+olcAttributeTypes: {70}( AliEnVOConfig:69 NAME 'lbsgAddress' SUP name )
+olcAttributeTypes: {71}( AliEnVOConfig:70 NAME 'lbsgDatabase' SUP name )
+olcAttributeTypes: {72}( AliEnVOConfig:71 NAME 'si2kNominalPrice' SUP name )
+olcAttributeTypes: {73}( AliEnVOConfig:72 NAME 'bankAdmin' SUP name )
+olcAttributeTypes: {74}( AliEnVOConfig:73 NAME 'bankCurrency' SUP name )
+olcAttributeTypes: {75}( AliEnVOConfig:74 NAME 'proxyAddress' SUP name )
+olcAttributeTypes: {76}( AliEnVOConfig:75 NAME 'jobDatabaseRead' SUP name )
+olcAttributeTypes: {77}( AliEnVOConfig:76 NAME 'taxAccount' SUP name )
+olcAttributeTypes: {78}( AliEnVOConfig:77 NAME 'taxRate' SUP name )
+olcAttributeTypes: {79}( AliEnVOConfig:78 NAME 'packmanmasterAddress' SUP name
+  )
+olcAttributeTypes: {80}( AliEnVOConfig:79 NAME 'messagesmasterAddress' SUP nam
+ e )
+olcAttributeTypes: {81}( AliEnVOConfig:80 NAME 'semasterDatabase' SUP name )
+olcAttributeTypes: {82}( AliEnVOConfig:81 NAME 'semasterManagerAddress' SUP na
+ me )
+olcAttributeTypes: {83}( AliEnVOConfig:82 NAME 'jobinfoManagerAddress' SUP nam
+ e )
+olcAttributeTypes: {84}( AliEnVOConfig:83 NAME 'sedetectmonalisaurl' SUP name 
+ )
+olcAttributeTypes: {85}( AliEnVOConfig:84 NAME 'sedefaultQosandCount' SUP name
+  )
+olcAttributeTypes: {86}( AliEnUser:1 NAME 'sshkey' SYNTAX 1.3.6.1.4.1.1466.115
+ .121.1.5 )
+olcAttributeTypes: {87}( AliEnUser:2 NAME 'roles' SUP name )
+olcAttributeTypes: {88}( AliEnUser:3 NAME 'subject' SUP name )
+olcAttributeTypes: {89}( AliEnUser:4 NAME 'accountName' SUP name )
+olcAttributeTypes: {90}( AliEnUser:5 NAME 'email' SUP name )
+olcAttributeTypes: {91}( AliEnUser:6 NAME 'CCID' SUP name )
+olcAttributeTypes: {92}( AliEnPackage:1 NAME 'path' SUP name )
+olcAttributeTypes: {93}( AliEnPackage:2 NAME 'version' SUP name )
+olcAttributeTypes: {94}( AliEnPackage:3 NAME 'options' SUP name )
+olcAttributeTypes: {95}( AliEnPackage:4 NAME 'packVersion' SUP name )
+olcAttributeTypes: {96}( AliEnPackage:5 NAME 'package' SUP name )
+olcAttributeTypes: {97}( AliEnPackage:6 NAME 'require' SUP name )
+olcAttributeTypes: {98}( AliEnMSS:1 NAME 'mss' SUP name )
+olcAttributeTypes: {99}( AliEnMSS:2 NAME 'savedir' SUP name )
+olcAttributeTypes: {100}( AliEnMSS:3 NAME 'tmpdir' SUP name )
+olcAttributeTypes: {101}( AliEnMSS:6 NAME 'lvmdatabase' SUP name )
+olcAttributeTypes: {102}( AliEnMSS:7 NAME 'uploadEndpoint' SUP name )
+olcAttributeTypes: {103}( AliEnMSS:8 NAME 'ioDaemons' SUP name )
+olcAttributeTypes: {104}( AliEnMSS:9 NAME 'environment' SUP name )
+olcAttributeTypes: {105}( AliEnMSS:10 NAME 'category' SUP name )
+olcAttributeTypes: {106}( AliEnMSS:11 NAME 'ioDaemonsConfig' SYNTAX 1.3.6.1.4.
+ 1.1466.115.121.1.5 )
+olcAttributeTypes: {107}( AliEnMSS:12 NAME 'QoS' SUP name )
+olcAttributeTypes: {108}( AliEnMSS:13 NAME 'ftdprotocol' SUP name )
+olcAttributeTypes: {109}( AliEnMSS:14 NAME 'deleteprotocol' SUP name )
+olcAttributeTypes: {110}( AliEnMSS:15 NAME 'seExclusiveWrite' SUP name )
+olcAttributeTypes: {111}( AliEnMSS:16 NAME 'seExclusiveRead' SUP name )
+olcAttributeTypes: {112}( AliEnMSS:17 NAME 'seVersion' SUP name )
+olcAttributeTypes: {113}( AliEnSOAPServer:4 NAME 'port' SUP name )
+olcAttributeTypes: {114}( AliEnSOAPServer:5 NAME 'certsubject' SUP name )
+olcAttributeTypes: {115}( AliEnSOAPServer:6 NAME 'soapType' SUP name )
+olcAttributeTypes: {116}( AliEnCE:1 NAME 'maxjobs' SUP name )
+olcAttributeTypes: {117}( AliEnCE:2 NAME 'jobs' SUP name )
+olcAttributeTypes: {118}( AliEnCE:3 NAME 'type' SUP name )
+olcAttributeTypes: {119}( AliEnCE:4 NAME 'submitcmd' SUP name )
+olcAttributeTypes: {120}( AliEnCE:5 NAME 'submitarg' SUP name )
+olcAttributeTypes: {121}( AliEnCE:6 NAME 'killcmd' SUP name )
+olcAttributeTypes: {122}( AliEnCE:7 NAME 'killarg' SUP name )
+olcAttributeTypes: {123}( AliEnCE:8 NAME 'statuscmd' SUP name )
+olcAttributeTypes: {124}( AliEnCE:9 NAME 'statusarg' SUP name )
+olcAttributeTypes: {125}( AliEnCE:10 NAME 'packages' SUP name )
+olcAttributeTypes: {126}( AliEnCE:11 NAME 'maxqueuedjobs' SUP name )
+olcAttributeTypes: {127}( AliEnCE:12 NAME 'TTL' SUP name )
+olcAttributeTypes: {128}( AliEnCE:13 NAME 'si2kPrice' SUP name )
+olcAttributeTypes: {129}( AliEnCE:14 NAME 'installMethod' SUP name )
+olcAttributeTypes: {130}( AliEnCE:15 NAME 'matchcmd' SUP name )
+olcAttributeTypes: {131}( AliEnCE:16 NAME 'matcharg' SUP name )
+olcAttributeTypes: {132}( AliEnCE:17 NAME 'cerequirements' SUP name )
+olcAttributeTypes: {133}( AliEnFTD:3 NAME 'maxTransfers' SUP name )
+olcAttributeTypes: {134}( AliEnFTD:4 NAME 'localOptions' SUP name )
+olcAttributeTypes: {135}( AliEnFTD:5 NAME 'remoteOptions' SUP name )
+olcAttributeTypes: {136}( AliEnFTD:6 NAME 'protocol' SUP name )
+olcAttributeTypes: {137}( AliEnFTD:7 NAME 'skipSizeCheck' SUP name )
+olcAttributeTypes: {138}( AliEnSite:1 NAME 'domain' SUP name )
+olcAttributeTypes: {139}( AliEnSite:2 NAME 'logdir' SUP name )
+olcAttributeTypes: {140}( AliEnSite:3 NAME 'cachedir' SUP name )
+olcAttributeTypes: {141}( AliEnSite:4 NAME 'workdir' SUP name )
+olcAttributeTypes: {142}( AliEnSite:5 NAME 'administrator' SUP name )
+olcAttributeTypes: {143}( AliEnSite:6 NAME 'location' SUP name )
+olcAttributeTypes: {144}( AliEnSite:7 NAME 'country' SUP name )
+olcAttributeTypes: {145}( AliEnSite:8 NAME 'longitude' SUP name )
+olcAttributeTypes: {146}( AliEnSite:9 NAME 'latitude' SUP name )
+olcAttributeTypes: {147}( AliEnSite:10 NAME 'record' SUP name )
+olcAttributeTypes: {148}( AliEnSite:11 NAME 'savese' SUP name )
+olcAttributeTypes: {149}( AliEnSite:12 NAME 'packmanAddress' SUP name )
+olcAttributeTypes: {150}( AliEnSite:13 NAME 'localconfig' SUP name )
+olcAttributeTypes: {151}( AliEnSite:14 NAME 'closese' SUP name )
+olcAttributeTypes: {152}( AliEnSite:15 NAME 'virtualSite' SUP name )
+olcAttributeTypes: {153}( AliEnSite:16 NAME 'siteKey' SUP name )
+olcAttributeTypes: {154}( AliEnSite:17 NAME 'siteToken' SUP name )
+olcAttributeTypes: {155}( AliEnSite:18 NAME 'distributeCreditsTo' SUP name )
+olcAttributeTypes: {156}( AliEnSite:19 NAME 'officialLcgName' SUP name )
+olcAttributeTypes: {157}( AliEnHostConfig:1 NAME 'ce' SUP name )
+olcAttributeTypes: {158}( AliEnHostConfig:2 NAME 'se' SUP name )
+olcAttributeTypes: {159}( AliEnHostConfig:3 NAME 'ftd' SUP name )
+olcAttributeTypes: {160}( AliEnHostConfig:5 NAME 'clc' SUP name )
+olcAttributeTypes: {161}( AliEnHostConfig:6 NAME 'tcprouter' SUP name )
+olcAttributeTypes: {162}( AliEnHostConfig:7 NAME 'packman' SUP name )
+olcAttributeTypes: {163}( AliEnHostConfig:8 NAME 'monalisa' SUP name )
+olcAttributeTypes: {164}( AliEnRole:1 NAME 'users' SUP name )
+olcAttributeTypes: {165}( AliEnRole:2 NAME 'public' SUP name )
+olcAttributeTypes: {166}( AliEnPartition:1 NAME 'CEname' SUP name )
+olcAttributeTypes: {167}( AliEnCLC:1 NAME 'lvmse' SUP name )
+olcAttributeTypes: {168}( AliEnCLC:2 NAME 'maxserver' SUP name )
+olcAttributeTypes: {169}( AliEnCLC:3 NAME 'preloadcachesize' SUP name )
+olcAttributeTypes: {170}( AliEnCLC:4 NAME 'transferlimit' SUP name )
+olcAttributeTypes: {171}( AliEnCLC:5 NAME 'ioport' SUP name )
+olcAttributeTypes: {172}( AliEnCLC:6 NAME 'monitorport' SUP name )
+olcAttributeTypes: {173}( AliEnCLC:7 NAME 'slaveserver' SUP name )
+olcAttributeTypes: {174}( AliEnCLC:8 NAME 'cachedirs' SUP name )
+olcAttributeTypes: {175}( AliEnCLC:9 NAME 'cachesize' SUP name )
+olcAttributeTypes: {176}( AliEnCLC:10 NAME 'cachelevel' SUP name )
+olcAttributeTypes: {177}( AliEnCLC:11 NAME 'cachelowbound' SUP name )
+olcAttributeTypes: {178}( AliEnCLC:12 NAME 'cacheupperbound' SUP name )
+olcAttributeTypes: {179}( AliEnCLC:13 NAME 'resyncflag' SUP name )
+olcAttributeTypes: {180}( AliEnTCPROUTER:1 NAME 'muxport' SUP name )
+olcAttributeTypes: {181}( AliEnTCPROUTER:2 NAME 'muxlisten' SUP name )
+olcAttributeTypes: {182}( AliEnTCPROUTER:3 NAME 'muxreuse' SUP name )
+olcAttributeTypes: {183}( AliEnTCPROUTER:4 NAME 'muxexecutable' SUP name )
+olcAttributeTypes: {184}( AliEnTCPROUTER:5 NAME 'muxexecutableport' SUP name )
+olcAttributeTypes: {185}( AliEnGASMODULE:1 NAME 'mandatory' SUP name )
+olcAttributeTypes: {186}( AliEnGASMODULE:2 NAME 'interface' SUP name )
+olcAttributeTypes: {187}( AliEnGASMODULE:3 NAME 'alias' SUP name )
+olcAttributeTypes: {188}( AliEngContainer:1 NAME 'gContainerParent' SUP name )
+olcAttributeTypes: {189}( AliEngContainer:2 NAME 'geoIPDatabase' SUP name )
+olcAttributeTypes: {190}( AliEngContainer:3 NAME 'reportTime' SUP name )
+olcAttributeTypes: {191}( AliEngContainer:4 NAME 'wakeupTime' SUP name )
+olcAttributeTypes: {192}( AliEngContainerJudge:1 NAME 'weight' SUP name )
+olcAttributeTypes: {193}( AliEngContainerJudge:2 NAME 'active' SUP name )
+olcAttributeTypes: {194}( AliEngContainerService:1 NAME 'authentication' SUP n
+ ame )
+olcAttributeTypes: {195}( AliEngContainerService:2 NAME 'global' SUP name )
+olcAttributeTypes: {196}( AliEngContainerService:3 NAME 'creatorClass' SUP nam
+ e )
+olcAttributeTypes: {197}( AliEngContainerServiceGAS:1 NAME 'gasModules' SUP na
+ me )
+olcAttributeTypes: {198}( AliEngContainerServiceExWrapper:1 NAME 'exec' SUP na
+ me )
+olcAttributeTypes: {199}( AliEnPackMan:1 NAME 'installDir' SUP name )
+olcAttributeTypes: {200}( AliEnPackMan:2 NAME 'platform' SUP name )
+olcAttributeTypes: {201}( AliEnPackMan:3 NAME 'forbidWnInstall' SUP name )
+olcAttributeTypes: {202}( AliEnPackMan:4 NAME 'method' SUP name )
+olcAttributeTypes: {203}( AliEnMonaLisa:1 NAME 'group' SUP name )
+olcAttributeTypes: {204}( AliEnMonaLisa:2 NAME 'lus' SUP name )
+olcAttributeTypes: {205}( AliEnMonaLisa:3 NAME 'shouldUpdate' SUP name )
+olcAttributeTypes: {206}( AliEnMonaLisa:4 NAME 'javaOpts' SUP name )
+olcAttributeTypes: {207}( AliEnMonaLisa:5 NAME 'storeType' SUP name )
+olcAttributeTypes: {208}( AliEnMonaLisa:6 NAME 'addModules' SUP name )
+olcAttributeTypes: {209}( AliEnMonaLisa:7 NAME 'removeModules' SUP name )
+olcAttributeTypes: {210}( AliEnMonaLisa:8 NAME 'addProperties' SUP name )
+olcAttributeTypes: {211}( AliEnMonaLisa:9 NAME 'removeProperties' SUP name )
+olcAttributeTypes: {212}( AliEnMonaLisa:10 NAME 'apmonConfig' SUP name )
+olcAttributeTypes: {213}( AliEnApiService:1 NAME 'prefork' SUP name )
+olcAttributeTypes: {214}( AliEnApiService:2 NAME 'perlmodule' SUP name )
+olcAttributeTypes: {215}( AliEnApiService:3 NAME 'sessionlifetime' SUP name )
+olcAttributeTypes: {216}( AliEnApiService:4 NAME 'sslport' SUP name )
+olcAttributeTypes: {217}( AliEnApiService:5 NAME 'sslkeydir' SUP name )
+olcAttributeTypes: {218}( AliEnApiService:6 NAME 'sslkeyfile' SUP name )
+olcAttributeTypes: {219}( AliEnApiService:7 NAME 'ssldhfile' SUP name )
+olcAttributeTypes: {220}( AliEnApiService:8 NAME 'sslcertdir' SUP name )
+olcAttributeTypes: {221}( AliEnApiService:9 NAME 'authorizationfile' SUP name 
+ )
+olcAttributeTypes: {222}( AliEnApiService:10 NAME 'user' SUP name )
+olcAttributeTypes: {223}( AliEnApiService:11 NAME 'role' SUP name )
+olcAttributeTypes: {224}( AliEnApiService:12 NAME 'useproxy' SUP name )
+olcAttributeTypes: {225}( AliEnApiService:14 NAME 'organisation' SUP name )
+olcAttributeTypes: {226}( AliEnApiService:16 NAME 'debug' SUP name )
+olcAttributeTypes: {227}( AliEnApiService:17 NAME 'commandlogging' SUP name )
+olcAttributeTypes: {228}( AliEnApiService:18 NAME 'performancelogging' SUP nam
+ e )
+olcAttributeTypes: {229}( AliEnApiService:19 NAME 'filteredcommands' SUP name 
+ )
+olcAttributeTypes: {230}( AliEnApiService:20 NAME 'localprivkeyfile' SUP name 
+ )
+olcAttributeTypes: {231}( AliEnApiService:21 NAME 'localpubkeyfile' SUP name )
+olcAttributeTypes: {232}( AliEnApiService:22 NAME 'remoteprivkeyfile' SUP name
+  )
+olcAttributeTypes: {233}( AliEnApiService:23 NAME 'remotepubkeyfile' SUP name 
+ )
+olcAttributeTypes: {234}( AliEnApiService:25 NAME 'uselocalconfig' SUP name )
+olcAttributeTypes: {235}( AliEnInstitution:1 NAME 'institutionName' SUP name )
+olcObjectClasses: {0}( AliEnVO NAME 'AliEnVO' SUP top STRUCTURAL MUST ( ldapHo
+ st $ ldapDN $ Name ) MAY ou )
+olcObjectClasses: {1}( AliEnVOConfig NAME 'AliEnVOConfig' SUP ( top $ organiza
+ tionalUnit ) STRUCTURAL MUST ( authPort $ authenDatabase $ authenHost $ authe
+ nDriver $ authHost $ catalogHost $ catalogPort $ catalogDatabase $ catalogDri
+ ver $ queuePort $ queueHost $ queueDatabase $ queueDriver $ queueDbHost $ log
+ Port $ logHost $ userDir $ isPort $ isDatabase $ isDriver $ isDbHost $ isHost
+  $ clusterMonitorUser $ clustermonitorPort $ brokerHost $ brokerPort $ transf
+ erManagerAddress $ transferBrokerAddress $ transferDatabase $ transferOptimiz
+ erAddress $ jobOptimizerAddress $ jobDatabase $ ldapmanager $ jobManagerAddre
+ ss $ jobBrokerAddress ) MAY ( proxyPort $ proxyHost $ proxyAddress $ processP
+ ort $ catalogueDatabase $ catalogueOptimizerAddress $ monalisaLUS $ monalisaG
+ roup $ authenSubject $ proofPort $ proofDatabase $ proofDriver $ proofDbHost 
+ $ proofHost $ proofMuxPortRange $ proofCryptPassword $ proofLogin $ proofTime
+ out $ proofMasterPort $ proofPackage $ webserverURL $ myproxyServer $ gContai
+ nerAddress $ rlsAddress $ portalUrl $ vomsServer $ apiServer $ jabberServer $
+  agentApiProxy $ nwsPort $ nwsDatabase $ nwsDriver $ nwsDbHost $ nwsHost $ lb
+ sgAddress $ lbsgDatabase $ si2kNominalPrice $ bankAdmin $ taxAccount $ taxRat
+ e $ bankCurrency $ jobDatabaseRead $ packmanmasterAddress $ messagesmasterAdd
+ ress $ semasterDatabase $ semasterManagerAddress $ jobinfoManagerAddress $ se
+ detectmonalisaurl $ sedefaultQosandCount ) )
+olcObjectClasses: {2}( AliEnUser NAME 'AliEnUser' SUP top STRUCTURAL MAY ( ssh
+ key $ roles $ subject $ accountName $ email $ CCID ) )
+olcObjectClasses: {3}( AliEnPackage NAME 'AliEnPackage' SUP top STRUCTURAL MUS
+ T ( path $ package $ version $ packVersion ) MAY ( options $ require ) )
+olcObjectClasses: {4}( AliEnMSS NAME 'AliEnMSS' SUP top STRUCTURAL MUST ( name
+  $ mss $ savedir ) MAY ( options $ tmpdir $ lvmdatabase $ uploadEndpoint $ io
+ Daemons $ category $ ioDaemonsConfig $ QoS $ ftdprotocol $ deleteprotocol $ s
+ eExclusiveWrite $ seExclusiveRead $ seVersion ) )
+olcObjectClasses: {5}( AliEnSOAPServer NAME 'AliEnSOAPServer' SUP top STRUCTUR
+ AL MUST ( host $ port ) MAY ( certsubject $ environment $ soapType ) )
+olcObjectClasses: {6}( AliEnSE NAME 'AliEnSE' SUP ( AliEnSOAPServer $ AliEnMSS
+  ) STRUCTURAL )
+olcObjectClasses: {7}( AliEnCE NAME 'AliEnCE' SUP top STRUCTURAL MUST ( name $
+  type $ host $ maxqueuedjobs ) MAY ( maxjobs $ submitcmd $ submitarg $ killcm
+ d $ killarg $ statuscmd $ statusarg $ packages $ TTL $ si2kPrice $ environmen
+ t $ installMethod $ matchcmd $ matcharg $ cerequirements ) )
+olcObjectClasses: {8}( AliEnFTD NAME 'AliEnFTD' SUP AliEnSOAPServer STRUCTURAL
+  MUST ( name $ port $ host $ certsubject $ maxTransfers ) MAY ( protocol $ lo
+ calOptions $ remoteOptions $ skipSizeCheck ) )
+olcObjectClasses: {9}( AliEnSite NAME 'AliEnSite' SUP organizationalUnit STRUC
+ TURAL MUST ( domain $ logdir $ tmpdir $ cachedir ) MAY ( savese $ packages $ 
+ workdir $ processPort $ administrator $ location $ country $ longitude $ lati
+ tude $ record $ packmanAddress $ localconfig $ environment $ accountName $ di
+ stributeCreditsTo $ closese $ virtualSite $ siteKey $ siteToken $ officialLcg
+ Name ) )
+olcObjectClasses: {10}( AliEnHostConfig NAME 'AliEnHostConfig' SUP top STRUCTU
+ RAL MUST host MAY ( ce $ se $ ftd $ clc $ tcprouter $ packages $ savese $ log
+ dir $ cachedir $ tmpdir $ packman $ closese $ monalisa $ workdir $ localconfi
+ g $ environment ) )
+olcObjectClasses: {11}( AliEnRole NAME 'AliEnRole' SUP top STRUCTURAL MUST uid
+  MAY ( users $ public $ accountName ) )
+olcObjectClasses: {12}( AliEnPartition NAME 'AliEnPartition' SUP top STRUCTURA
+ L MUST name MAY CEname )
+olcObjectClasses: {13}( AliEnCLC NAME 'AliEnCLC' SUP top STRUCTURAL MUST ( lvm
+ se $ name $ host $ port $ resyncflag ) MAY ( maxserver $ preloadcachesize $ t
+ ransferlimit $ ioport $ monitorport $ slaveserver $ cachedirs $ cachesize $ c
+ achelevel $ cachelowbound $ cacheupperbound ) )
+olcObjectClasses: {14}( AliEnTCPROUTER NAME 'AliEnTCPROUTER' SUP top STRUCTURA
+ L MUST ( name $ host $ port $ muxport $ muxlisten $ muxreuse $ muxexecutable 
+ $ muxexecutableport ) )
+olcObjectClasses: {15}( AliEnGASMODULE NAME 'AliEnGASMODULE' SUP top STRUCTURA
+ L MUST ( alias $ type $ mandatory $ interface $ options ) )
+olcObjectClasses: {16}( AliEngContainer NAME 'AliEngContainer' SUP top STRUCTU
+ RAL MUST ( ou $ geoIPDatabase ) MAY ( gContainerParent $ reportTime $ wakeupT
+ ime ) )
+olcObjectClasses: {17}( AliEngContainerJudge NAME 'AliEngContainerJudge' SUP t
+ op STRUCTURAL MUST ( name $ weight $ active ) )
+olcObjectClasses: {18}( AliEngContainerService NAME 'AliEngContainerService' S
+ UP top STRUCTURAL MUST ( name $ creatorClass $ global ) MAY authentication )
+olcObjectClasses: {19}( AliEngContainerServiceGAS NAME 'AliEngContainerService
+ GAS' SUP AliEngContainerService STRUCTURAL MUST gasModules )
+olcObjectClasses: {20}( AliEngContainerServiceExWrapper NAME 'AliEngContainerS
+ erviceExWrapper' SUP AliEngContainerService STRUCTURAL MAY exec )
+olcObjectClasses: {21}( AliEnPackMan NAME 'AliEnPackMan' SUP AliEnSOAPServer S
+ TRUCTURAL MUST name MAY ( platform $ installDir $ forbidWnInstall $ method ) 
+ )
+olcObjectClasses: {22}( AliEnMonaLisa NAME 'AliEnMonaLisa' SUP organizationalU
+ nit STRUCTURAL MUST name MAY ( host $ group $ lus $ shouldUpdate $ javaOpts $
+  storeType $ addModules $ removeModules $ addProperties $ removeProperties $ 
+ apmonConfig $ administrator $ location $ country $ longitude $ latitude $ dom
+ ain ) )
+olcObjectClasses: {23}( AliEnApiService NAME 'AliEnApiService' SUP top STRUCTU
+ RAL MUST ( name $ host $ port $ localprivkeyfile $ localpubkeyfile $ remotepr
+ ivkeyfile $ remotepubkeyfile ) MAY ( prefork $ perlmodule $ sessionlifetime $
+  sslport $ sslkeydir $ sslkeyfile $ ssldhfile $ sslcertdir $ authorizationfil
+ e $ user $ role $ useproxy $ domain $ organisation $ ldapdn $ debug $ command
+ logging $ performancelogging $ filteredcommands $ environment $ uselocalconfi
+ g ) )
+olcObjectClasses: {24}( AliEnInstitution NAME 'AliEnInstitution' SUP organizat
+ ionalUnit STRUCTURAL MUST ( uid $ institutionName ) )
+structuralObjectClass: olcSchemaConfig
+entryUUID: 3ea3d44a-928c-1030-826e-d50de8eaff50
+creatorsName: cn=config
+createTimestamp: 20111024130300Z
+entryCSN: 20111024130300.108563Z#000000#000#000000
+modifiersName: cn=config
+modifyTimestamp: 20111024130300Z

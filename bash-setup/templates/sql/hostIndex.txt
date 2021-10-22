@@ -1,0 +1,7 @@
+USE `dataDB`;
+LOCK TABLES `HOSTS` WRITE;
+INSERT INTO `HOSTS` VALUES (hostIndex,'address','db','mysql',NULL);
+USE `userDB`;
+LOCK TABLES `HOSTS` WRITE;
+INSERT INTO `HOSTS` VALUES (hostIndex,'address','db','mysql',NULL);
+UNLOCK TABLES;

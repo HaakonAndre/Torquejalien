@@ -1,0 +1,4 @@
+dn: dc=localdomain
+objectClass: top
+objectClass: domain
+dc: localdomain

@@ -1,0 +1,4 @@
+dn: ou=People,o=localhost,dc=localdomain
+objectClass: top
+objectClass: organizationalUnit
+ou: People

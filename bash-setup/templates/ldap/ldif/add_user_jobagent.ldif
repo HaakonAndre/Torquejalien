@@ -1,0 +1,13 @@
+dn: uid=jobagent,ou=People,o=localhost,dc=localdomain
+accountname: special_account_jobagent
+cn: JobAgent generic identity
+gecos: JobAgent
+gidnumber: -2
+homedirectory: /localhost/localdomain/user/j/jobagent
+objectclass: top
+objectclass: posixAccount
+objectclass: pkiUser
+objectclass: AliEnUser
+subject: /C=ch/O=AliEn/CN=JobAgent
+uid: jobagent
+uidnumber: -2

@@ -1,0 +1,4 @@
+dn: ou=Packages,o=localhost,dc=localdomain
+objectClass: top
+objectClass: organizationalUnit
+ou: Packages

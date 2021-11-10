@@ -13,7 +13,7 @@ ldap_pass="pass"
 
 function ldap_apply_ldif () {
     file=$1
-    ldapadd -x -w ${ldap_pass} -h localhost -p ${ldap_port} -D "cn=Manager,dc=localdomain" -f "$file"
+    ldapadd -d -8 -x -w ${ldap_pass} -h localhost -p ${ldap_port} -D "cn=Manager,dc=localdomain" -f "$file"
 }
 
 function createConfig(){

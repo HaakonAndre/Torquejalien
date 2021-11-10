@@ -28,16 +28,18 @@ services:
 
   schedd:
     image: jalien-base
-    command: bash /ce-setup/torque-conf/docker-entrypoint.sh pbsServer
+    command: /ce-setup/torque-conf/docker-entrypoint.sh pbsServer
     environment:
-		TORQUE_NODE: "worker"
-		TORQUE_CLIENT: "localhost.localdomain"
+      TORQUE_HOST: "schedd"
+      TORQUE_NODE: "worker"
+      TORQUE_CLIENT: "localhost.localdomain"
     volumes:
-    	$JALIEN_SETUP_DIR/ce-setup/torque-conf/torque.conf:/etc/torque/torque.conf
+      - $JALIEN_SETUP_DIR/ce-setup/torque-conf/torque.conf:/etc/torque/torque.conf
+      - $JALIEN_SETUP_DIR/ce-setup:/ce-setup:ro
 
   worker:
     image: jalien-base
-    command: bash /ce-setup/torque-conf/docker-entrypoint.sh pbsMom
+    command: /ce-setup/torque-conf/docker-entrypoint.sh pbsMom
     environment:
       TORQUE_HOST: "schedd"
     volumes:
@@ -52,6 +54,7 @@ services:
     hostname: "localhost.localdomain"
     environment:
       TORQUE_HOST: "schedd"
+      LD_LIBRARY_PATH: /tmp
     volumes:
       - /cvmfs/alice.cern.ch:/cvmfs/alice.cern.ch
       - $SHARED_VOLUME:/jalien-dev

@@ -73,11 +73,12 @@ function mysql_apply() {
 function initializeDB() {
     mkdir -p $(dirname $my_cnf)
     echo -e $my_cnf_content > $my_cnf
-    mysqld --defaults-file=$my_cnf --initialize-insecure --datadir="${sql_home}/data"
+    rm -rf ${sql_home}/data
+    mysqld --defaults-file=$my_cnf --initialize-insecure --datadir="${sql_home}/data" --verbose
 }
 
 function startDB(){
-    mysqld_safe --defaults-file=$my_cnf &>/dev/null &
+    mysqld_safe --verbose --defaults-file=$my_cnf &>/dev/null &
 }
 
 function fillDatabase(){
@@ -202,11 +203,14 @@ function main(){
         }
         else {
             initializeDB
+	    echo "DB is initialized"
             startDB
+	    echo "DB is started"
 
             sleep 6
 
             fillDatabase
+	    echo "DB is filled"
             createCatalogueDB $dataDB
             createCatalogueDB $userDB
 

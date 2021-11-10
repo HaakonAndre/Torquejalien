@@ -6,11 +6,13 @@ CE_CONFIG=$JALIEN_DEV/config/ComputingElement/docker
 LOGS=$JALIEN_DEV/logs
 
 #setup submituser to submit jobs on TORQUE and start CE
-[ ! -e /home/submituser ] && adduser submituser --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
+[ ! -e /home/submituser ] && adduser submituser --comment "First Last,RoomNumber,WorkPhone,HomePhone" 
 echo "submituser:toor" | chpasswd
 
 [ ! -e /home/submituser/tmp ] && su submituser -c "mkdir /home/submituser/tmp /home/submituser/log"
 touch /home/submituser/no-proxy-check /home/submituser/enable-sandbox
+
+echo $TORQUE_HOST > /var/spool/torque/server_name
 
 #run CE with auto reloading
 CE_CMD="java -cp $JALIEN_DEV/alien-cs.jar -Duserid=$(id -u) -Dcom.sun.jndi.ldap.connect.pool=false -DAliEnConfig=$CE_CONFIG -Djava.net.preferIPv4Stack=true alien.site.ComputingElement"
